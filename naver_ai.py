@@ -21,8 +21,7 @@ class NaverAI:
         headers = {
             'Content-Type': 'application/json; charset=utf-8',
             'X-NCP-CLOVASTUDIO-API-KEY': self._api_key,
-            'X-NCP-APIGW-API-KEY': self._api_key_primary_val,
-            # 'X-NCP-CLOVASTUDIO-REQUEST-ID': self._request_id
+            'X-NCP-APIGW-API-KEY': self._api_key_primary_val
         }
         conn = http.client.HTTPSConnection(self._host)
         conn.request('POST', '/testapp/v1/completions/LK-B', json.dumps(completion_request), headers)
@@ -34,9 +33,10 @@ class NaverAI:
 
     def execute(self, completion_request):
         res = self._send_request(completion_request)
-        if res['status']['code'] == '20000':
-            return res['result']['text']
-        else:
-            return f"{res['status']['code']}"
+        return res
+#         if res['status']['code'] == '20000':
+#             return res['result']['text']
+#         else:
+#             return f"{res['status']['code']}"
 
 
